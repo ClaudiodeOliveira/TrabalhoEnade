@@ -1,0 +1,67 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <h2 class="page-header">Gerenciar Resultados</h2>
+        <br/>
+        <h:form id="formPrincipal">
+            <div align="center">
+                
+                <p:dataTable var="lista" value="#{resultadoBean.resultados}"
+                             id="tabelaNota" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{RowsPerPageDropdown} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             paginator="true" rows="10" rowsPerPageTemplate="5,10,25,50,100,9999" style="width:100%">
+
+                    
+                    <p:column headerText="Aluno" sortBy="#{lista.idUsuario.nomeUsuario}" filterBy="#{lista.idUsuario.nomeUsuario}">
+                        <h:outputText value="#{lista.idUsuario.nomeUsuario}" />
+                    </p:column>
+                    
+                    <p:column headerText="Prova" sortBy="#{lista.idProva.dataProva}" filterBy="#{lista.idProva.dataProva}">
+                        <h:outputText value="#{lista.idProva.dataProva}" />
+                    </p:column>
+                    
+                    <p:column headerText="Nota" sortBy="#{lista.valorObtido}" filterBy="#{lista.valorObtido}">
+                        <h:outputText value="#{lista.valorObtido}" />
+                    </p:column>
+                    
+                </p:dataTable>
+            </div>
+            <br/>
+            
+            <div align="center">
+                <h3>Exportar dados da página</h3>
+
+                <h:commandLink id="excel">
+                    <p:graphicImage name="./images/exports/excel.png" />
+                    <p:dataExporter type="xls" target="tabelaNota" fileName="notas" postProcessor="#{resultadoBean.postProcessXLS}" />
+                </h:commandLink>
+
+                <h:commandLink id="pdf">
+                    <p:graphicImage name="./images/exports/pdf.png" />
+                    <p:dataExporter type="pdf" target="tabelaNota" fileName="notas" preProcessor="#{resultadoBean.preProcessPDF}" />
+                </h:commandLink>
+
+
+                <h:commandLink>
+                    <p:graphicImage name="./images/exports/csv.png" width="24"/>
+                    <p:dataExporter type="csv" target="tabelaNota" fileName="nota" />
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage  name="./images/exports/xml.png" width="24"/>
+                    <p:dataExporter type="xml" target="tabelaNota" fileName="nota" />
+                </h:commandLink>
+            </div>
+
+            <p:confirmDialog global="true">  
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+            </p:confirmDialog>  
+            
+        </h:form>
+    </ui:define>
+</ui:composition>
