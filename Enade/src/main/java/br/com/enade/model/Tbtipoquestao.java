@@ -17,7 +17,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,7 +33,7 @@ public class Tbtipoquestao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "idTipoQuestao")
-	private Integer idTipoQuestao;
+	private Long idTipoQuestao;
 	@Basic(optional = false)
 	@Size(min = 1, max = 45)
 	@Column(name = "nomeTipoQuestaocol")
@@ -45,20 +44,20 @@ public class Tbtipoquestao implements Serializable {
 	public Tbtipoquestao() {
 	}
 
-	public Tbtipoquestao(Integer idTipoQuestao) {
+	public Tbtipoquestao(Long idTipoQuestao) {
 		this.idTipoQuestao = idTipoQuestao;
 	}
 
-	public Tbtipoquestao(Integer idTipoQuestao, String nomeTipoQuestaocol) {
+	public Tbtipoquestao(Long idTipoQuestao, String nomeTipoQuestaocol) {
 		this.idTipoQuestao = idTipoQuestao;
 		this.nomeTipoQuestaocol = nomeTipoQuestaocol;
 	}
 
-	public Integer getIdTipoQuestao() {
+	public Long getIdTipoQuestao() {
 		return idTipoQuestao;
 	}
 
-	public void setIdTipoQuestao(Integer idTipoQuestao) {
+	public void setIdTipoQuestao(Long idTipoQuestao) {
 		this.idTipoQuestao = idTipoQuestao;
 	}
 

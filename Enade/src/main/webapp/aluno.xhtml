@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-		<h2 class="page-header">Gerenciar Usuários</h2>
+		<h2 class="page-header">Dados do Aluno</h2>
 		<br />
 		<h:form id="formPrincipal">
 			<div align="center">
@@ -15,46 +15,42 @@
 					paginator="true" rows="10"
 					rowsPerPageTemplate="5,10,25,50,100,9999" style="width:100%">
 
+
 					<p:column headerText="Nome" sortBy="#{lista.nomeUsuario}"
 						filterBy="#{lista.nomeUsuario}">
-						<h:outputText value="#{lista.nomeUsuario}" />
+						<h:outputText value="#{lista.nomeUsuario}"
+							rendered="#{lista.tbTipoUsuarioidTipoUsuario.idTipoUsuario == 2}" />
 					</p:column>
 
 					<p:column headerText="Email" sortBy="#{lista.emailUsuario}"
 						filterBy="#{lista.emailUsuario}">
-						<h:outputText value="#{lista.emailUsuario}" />
+						<h:outputText value="#{lista.emailUsuario}"
+							rendered="#{lista.tbTipoUsuarioidTipoUsuario.idTipoUsuario == 2}" />
 					</p:column>
 
 					<p:column headerText="Tipo"
 						sortBy="#{lista.tbTipoUsuarioidTipoUsuario.nomeTipoUsuario}"
 						filterBy="#{lista.tbTipoUsuarioidTipoUsuario.nomeTipoUsuario}">
 						<h:outputText
-							value="#{lista.tbTipoUsuarioidTipoUsuario.nomeTipoUsuario}" />
+							value="#{lista.tbTipoUsuarioidTipoUsuario.nomeTipoUsuario}"
+							rendered="#{lista.tbTipoUsuarioidTipoUsuario.idTipoUsuario == 2}" />
 					</p:column>
 
 					<p:column headerText="Opções" exportable="false">
 						<center>
 							<p:commandButton icon="ui-icon-pencil" value="Editar"
-								onclick="PF('record').show();"
-								update="formPrincipal:panelRecord" process="@this">
+								onclick="PF('record').show();" update="formPrincipal:panelRecord" process="@this"
+								rendered="#{lista.tbTipoUsuarioidTipoUsuario.idTipoUsuario == 2}">
 								<f:setPropertyActionListener target="#{usuarioBean.usuario}"
 									value="#{lista}" />
 							</p:commandButton>
-							<p:commandButton icon="ui-icon-trash" value="Deletar"
-								action="#{usuarioBean.remover(lista)}" process="@this"
-								update="@form" />
-
 						</center>
 					</p:column>
 
 				</p:dataTable>
 			</div>
 			<br />
-			<p:column>
-				<p:commandButton icon="ui-icon-plus" value="Novo"
-					onclick="PF('record').show();">
-				</p:commandButton>
-			</p:column>
+
 			<div align="center">
 				<h3>Exportar dados da página</h3>
 
@@ -100,11 +96,11 @@
                     <p:inputText id="email"
 						value="#{usuarioBean.usuario.emailUsuario}" />
                     Tipo de Usuário:
-                    <p:selectOneMenu id="tipoUsuario"
+                   <p:selectOneMenu id="tipoUsuario"
 						value="#{usuarioBean.tipoUsuarioId}" style="width:125px">
 						<f:selectItems value="#{usuarioBean.tipoUsuarios}"
 							var="tipoUsuario" itemLabel="#{tipoUsuario.nomeTipoUsuario}"
-							itemValue="#{tipoUsuario.idTipoUsuario}" />
+							itemValue="#{tipoUsuario.idTipoUsuario}"/>
 					</p:selectOneMenu>
                     Senha:
                     <p:password id="senha"
@@ -112,8 +108,8 @@
 				</p:panelGrid>
 				<br />
 				<p:commandButton value="Salvar"
-					actionListener="#{usuarioBean.gravar}" onclick="record.hide()"
-					alt="Record" />
+					actionListener="#{usuarioBean.salvar}" onclick="record.hide()"
+					alt="Record"  />
 			</p:dialog>
 
 		</h:form>

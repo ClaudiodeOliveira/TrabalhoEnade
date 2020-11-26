@@ -30,9 +30,6 @@ public class UsuarioBean implements Serializable {
 	private TipoUsuarioDao tipoUsuarioDao;
 
 	@Inject
-	private FacesContext context;
-
-	@Inject
 	private LoginBean login;
 
 	private List<Tbusuario> usuarios;
@@ -68,7 +65,7 @@ public class UsuarioBean implements Serializable {
 	}
 
 	@Transacional
-	public String gravar() {
+	public void gravar() {
 		System.out.println("Gravando usuario " + this.usuario.getNomeUsuario());
 
 		if (this.usuario.getIdUsuario() == null
@@ -83,7 +80,27 @@ public class UsuarioBean implements Serializable {
 		}
 		this.usuario = new Tbusuario();
 
-		return "usuarios?faces-redirect=true";
+	}
+
+	@Transacional
+	public void salvar() {
+		System.out.println("Gravando usuario " + this.usuario.getNomeUsuario());
+
+		if (this.usuario.getIdUsuario() == null
+				&& login.getUsuarioLogado().getTbTipoUsuarioidTipoUsuario().getIdTipoUsuario() != 1) {
+			this.gravarTipoUsuario();
+			if (this.usuario.getTbTipoUsuarioidTipoUsuario().getIdTipoUsuario() == 2) {
+				this.dao.adiciona(this.usuario);
+				this.usuarios = this.dao.listarTodos();
+			}
+		} else if (login.getUsuarioLogado().getTbTipoUsuarioidTipoUsuario().getIdTipoUsuario() != 1) {
+			this.gravarTipoUsuario();
+			if (this.usuario.getTbTipoUsuarioidTipoUsuario().getIdTipoUsuario() == 2) {
+				this.dao.atualiza(this.usuario);
+				this.usuarios = this.dao.listarTodos();
+			}
+		}
+		this.usuario = new Tbusuario();
 
 	}
 

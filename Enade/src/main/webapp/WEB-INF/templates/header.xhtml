@@ -20,7 +20,7 @@
 				<p:menuitem value="Início" icon="ui-icon-home" url="index.xhtml" />
 
 				<p:submenu label="Gerenciar" icon="ui-icon-gear"
-					rendered="true">
+					rendered="#{loginBean.usuarioLogado.tbTipoUsuarioidTipoUsuario.idTipoUsuario == 1}">
 					<p:menuitem value="Usuário" icon="ui-icon-person"
 						url="usuarios.xhtml" />
 					<p:menuitem value="Provas" icon="ui-icon-person" url="prova.xhtml" />

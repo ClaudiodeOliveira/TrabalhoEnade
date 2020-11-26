@@ -26,13 +26,15 @@
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-			<attribute name="owner.project.facets" value="jboss.m2"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/apache-tomcat-9.0.38/apache-tomcat-9.0.38/bin/bootstrap.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/apache-tomcat-9.0.38/apache-tomcat-9.0.38/bin/commons-daemon.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/apache-tomcat-9.0.38/apache-tomcat-9.0.38/bin/tomcat-juli.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

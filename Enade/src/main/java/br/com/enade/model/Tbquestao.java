@@ -8,9 +8,12 @@ package br.com.enade.model;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.annotation.Generated;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -30,9 +33,10 @@ public class Tbquestao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "idQuestao")
-	private Integer idQuestao;
+	private Long idQuestao;
 	@Basic(optional = false)
 	@Size(min = 1, max = 45)
 	@Column(name = "descricaoQuestao")
@@ -66,21 +70,21 @@ public class Tbquestao implements Serializable {
 	public Tbquestao() {
 	}
 
-	public Tbquestao(Integer idQuestao) {
+	public Tbquestao(Long idQuestao) {
 		this.idQuestao = idQuestao;
 	}
 
-	public Tbquestao(Integer idQuestao, String descricaoQuestao, short estadoQuestao) {
+	public Tbquestao(Long idQuestao, String descricaoQuestao, short estadoQuestao) {
 		this.idQuestao = idQuestao;
 		this.descricaoQuestao = descricaoQuestao;
 		this.estadoQuestao = estadoQuestao;
 	}
 
-	public Integer getIdQuestao() {
+	public Long getIdQuestao() {
 		return idQuestao;
 	}
 
-	public void setIdQuestao(Integer idQuestao) {
+	public void setIdQuestao(Long idQuestao) {
 		this.idQuestao = idQuestao;
 	}
 
