@@ -31,9 +31,11 @@ public class UsuarioBean implements Serializable {
 
 	@Inject
 	private FacesContext context;
-	
+
 	@Inject
 	private LoginBean login;
+
+	private List<Tbusuario> usuarios;
 
 	private Long usuarioId;
 
@@ -68,11 +70,16 @@ public class UsuarioBean implements Serializable {
 	@Transacional
 	public String gravar() {
 		System.out.println("Gravando usuario " + this.usuario.getNomeUsuario());
-		this.gravarTipoUsuario();
-		if (this.usuario.getIdUsuario() == null && login.getUsuarioLogado().getTbTipoUsuarioidTipoUsuario().getIdTipoUsuario() != 2) {
+
+		if (this.usuario.getIdUsuario() == null
+				&& login.getUsuarioLogado().getTbTipoUsuarioidTipoUsuario().getIdTipoUsuario() != 2) {
+			this.gravarTipoUsuario();
 			this.dao.adiciona(this.usuario);
-		} else if ( this.usuario.getTbTipoUsuarioidTipoUsuario().getIdTipoUsuario() != 2) {
+			this.usuarios = this.dao.listarTodos();
+		} else if (login.getUsuarioLogado().getTbTipoUsuarioidTipoUsuario().getIdTipoUsuario() != 2) {
+			this.gravarTipoUsuario();
 			this.dao.atualiza(this.usuario);
+			this.usuarios = this.dao.listarTodos();
 		}
 		this.usuario = new Tbusuario();
 

@@ -15,11 +15,6 @@
 					paginator="true" rows="10"
 					rowsPerPageTemplate="5,10,25,50,100,9999" style="width:100%">
 
-					<p:column headerText="Código" sortBy="#{lista.idUsuario}"
-						filterBy="#{lista.idUsuario}">
-						<h:outputText value="#{lista.idUsuario}" />
-					</p:column>
-
 					<p:column headerText="Nome" sortBy="#{lista.nomeUsuario}"
 						filterBy="#{lista.nomeUsuario}">
 						<h:outputText value="#{lista.nomeUsuario}" />
@@ -40,7 +35,8 @@
 					<p:column headerText="Opções" exportable="false">
 						<center>
 							<p:commandButton icon="ui-icon-pencil" value="Editar"
-								onclick="PF('record').show();">
+								onclick="PF('record').show();"
+								update="formPrincipal:panelRecord" process="@this">
 								<f:setPropertyActionListener target="#{usuarioBean.usuario}"
 									value="#{lista}" />
 							</p:commandButton>
